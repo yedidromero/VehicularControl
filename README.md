@@ -7,7 +7,7 @@ or<br>
 yarn dev<br>
  or<br>
 pnpm dev<br>
-**Additional need next** <br>
+** Additional need next ** <br>
 for yarn add next
 <br>
 
