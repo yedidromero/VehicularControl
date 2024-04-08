@@ -301,6 +301,13 @@ const Home = () => {
                             </svg>
                             Propietarios
                         </a>
+                        <a href="/historial" className="flex items-center text-gray-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            </svg>
+                            historial
+                        </a>
     </div>
 </div>
 
@@ -310,6 +317,11 @@ const Home = () => {
 
                     
                     </div>
+                    <form action="#" method="GET" class="mt-6 flex max-w-md gap-x-4 mb-4">
+    <label for="search" class="sr-only">Search</label>
+    <input id="search" name="search" type="text" autocomplete="off" required class="min-w-0 flex-auto rounded-md border-0 bg-white px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6" placeholder="No. de serie" style={{ backgroundColor: 'white' }} />
+    <button type="submit" class="flex-none rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500">Buscar</button>
+</form>
                     <div class="hidden md:block" id="noticaccion">
                     <div class="ml-4 flex items-center md:ml-6">
                     {publicKey ? ( 
@@ -449,21 +461,32 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div class="sm:col-span-3 grid grid-cols-2 gap-x-4">
-                        <div>
-                            <label for="modelo" class="block text-sm font-medium leading-6 text-gray-900">Fecha venta</label>
-                            <div class="mt-2">
-                                <input type="text" name="modelo" id="modelo" autocomplete="modelo" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="anio" class="block text-sm font-medium leading-6 text-gray-900">Año</label>
-                            <div class="mt-2">
-                                <input type="text" name="anio" id="anio" autocomplete="anio" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="sm:col-span-3 grid grid-cols-3 gap-x-4">
+    <div>
+        <label for="modelo" class="block text-sm font-medium leading-6 text-gray-900">Fecha venta</label>
+        <div class="mt-2">
+            <input type="text" name="modelo" id="modelo" autocomplete="modelo" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+        </div>
+    </div>
+    <div>
+        <label for="anio" class="block text-sm font-medium leading-6 text-gray-900">Año</label>
+        <div class="mt-2">
+            <input type="text" name="anio" id="anio" autocomplete="anio" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+        </div>
+    </div>
+    <div>
+        <label for="serie" class="block text-sm font-medium leading-6 text-gray-900">Número de serie</label>
+        <div class="mt-2">
+            <input type="text" name="serie" id="serie" autocomplete="serie" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+        </div>
+    </div>
+</div>
 
+
+
+
+                                
+                                        
                     <div class="sm:col-span-3">
                         <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Estado</label>
                         <div class="mt-2">
@@ -476,12 +499,19 @@ const Home = () => {
                         <div class="mt-2">
                             <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                         </div>
-                    </div> 
+                    </div>
+
+                                
+
                 </div>
 
                 </dl>
             </div>
-            
+            <div class="sm:col-span-6 flex justify-center mt-6">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Enviar
+                    </button>
+            </div>
         </div>
                     ) : (
                         <div className="flex flex-col place-items-center justify-center">

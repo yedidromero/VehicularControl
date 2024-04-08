@@ -432,68 +432,18 @@ const Home = () => {
             </nav>
                                 {publicKey ? (
         <div class="m-8 ml-3 md:ml-52 mr-8"  >
-            <div class="px-4 sm:px-0">
-                <h3 class="text-base font-semibold leading-7 text-gray-900">Propietario actual</h3>
-                
-            </div>
-            <div class="border-t-2  border-gray-900">
-                <dl class="divide-y divide-gray-100">
-                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                
-                    
-
-                    <div class="sm:col-span-3">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
-                        <div class="mt-2">
-                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3 grid grid-cols-2 gap-x-4">
-                        <div>
-                            <label for="modelo" class="block text-sm font-medium leading-6 text-gray-900">Placa anterior</label>
-                            <div class="mt-2">
-                                <input type="text" name="modelo" id="modelo" autocomplete="modelo" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="anio" class="block text-sm font-medium leading-6 text-gray-900">Placa actual</label>
-                            <div class="mt-2">
-                                <input type="text" name="anio" id="anio" autocomplete="anio" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Fecha adquisición</label>
-                        <div class="mt-2">
-                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                        </div>
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Lugar de adquisición</label>
-                        <div class="mt-2">
-                            <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                        </div>
-                    </div>                 
-
-
-                </div>
-
-                </dl>
-            </div>
+        
             
 
             <div class="px-4 mt-6 sm:px-0">
-                <h3 class="text-base font-semibold leading-7 text-gray-900">Propietarios anteriores</h3>
+                <h3 class="text-base font-semibold leading-7 text-gray-900">Historial</h3>
                 
             </div>
             <div class="border-t-2 border-gray-900">
                 <dl class="divide-y divide-gray-100 bg-gray-400 rounded-lg">
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3"> {/* Cambio realizado aquí para que haya tres columnas en dispositivos grandes */}
                         <div class="sm:col-span-1 ml-2"> {/* Columna 1 */}
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
+                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombre de propietario</label>
                             <div class="mt-2">
                                 <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                             </div>
@@ -514,7 +464,7 @@ const Home = () => {
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-3 mb-4"> {/* Cambio realizado aquí para que haya tres columnas en dispositivos grandes */}
                         <div class="sm:col-span-1 mb-4 ml-2"> {/* Columna 1 */}
-                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
+                            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nombre de propietario</label>
                             <div class="mt-2">
                                 <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
                             </div>
@@ -536,15 +486,121 @@ const Home = () => {
                     </div>
                     
                 </dl>
-                <div class="sm:col-span-6 flex justify-center">
+                {/**<div class="sm:col-span-6 flex justify-center">
                             
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Enviar
                             </button>
-                            </div>
+                            </div> */}
+                
             </div>
 
+            {/*inicia detalle automovil*/}
+            <div class="px-4 sm:px-0">
+                <h3 class="text-base font-semibold leading-7 text-gray-900">Detalle del automóvil</h3>
+                
+            </div>
+            <div class="border-t-2  border-gray-900">
+                <dl class="divide-y divide-gray-100">
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                
+                    <div class="sm:col-span-3">
+                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">País origen</label>
+                        <div class="mt-2">
+                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Distribuidor</label>
+                        <div class="mt-2">
+                            <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        </div>
+                    </div>  
+
+                    <div class="sm:col-span-3">
+                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Marca</label>
+                        <div class="mt-2">
+                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3 grid grid-cols-2 gap-x-4">
+                        <div>
+                            <label for="modelo" class="block text-sm font-medium leading-6 text-gray-900">Modelo</label>
+                            <div class="mt-2">
+                                <input type="text" name="modelo" id="modelo" autocomplete="modelo" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="anio" class="block text-sm font-medium leading-6 text-gray-900">Año</label>
+                            <div class="mt-2">
+                                <input type="text" name="anio" id="anio" autocomplete="anio" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Número de serie</label>
+                        <div class="mt-2">
+                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        </div>
+                    </div>
+
+                    
+
+                   
+
+                    
+                </div>
+
+                </dl>
+            </div>
             
+
+            <div class="px-4 mt-6 sm:px-0">
+                <h3 class="text-base font-semibold leading-7 text-gray-900">Detalle de multas</h3>
+                
+            </div>
+            <div class="border-t-2 border-gray-900">
+                <dl class="divide-y divide-gray-100">
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2"> {/* Cambio realizado aquí para que haya dos columnas en dispositivos grandes */}
+                        <div class="sm:col-span-1"> {/* Columna 1 */}
+                            <div class="sm:grid sm:grid-cols-3 sm:gap-x-6 sm:gap-y-8"> {/* Cambio realizado aquí para que la primera columna se divida en tres partes */}
+                                <div> {/* Primera parte de la primera columna */}
+                                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Fecha</label>
+                                    <div class="mt-2">
+                                    <input type="date" name="fecha" id="fecha" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                                    </div>
+                                </div>
+                                <div> {/* Segunda parte de la primera columna */}
+                                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Multa</label>
+                                    <div class="mt-2">
+                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+                                <div> {/* Tercera parte de la primera columna */}
+                                    <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Estado de Multa</label>
+                                    <div class="mt-2">
+                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-1"> {/* Columna 2 */}
+                            {/* Esta columna está vacía */}
+                        </div>
+                        
+                        
+
+                    </div>
+                </dl>
+            </div>
+
+
+
+
+            {/**termina detalle automovil */}
 
 
 
