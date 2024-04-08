@@ -17,6 +17,12 @@ The pages/api directory is mapped to /api/*. Files in this directory are treated
 
 This project uses next/font to automatically optimize and load Inter, a custom Google Font.
 
+# Sol SCAN
+
+https://solscan.io/tx/rFYh2nWd48Af4R6uxr6C4UXqVPuwPQd6yCu9DSuYuLVjvJUSHrV3qqed8derAqTHN9XRE5CtSWeGkHBd6oU2uSs?cluster=devnet <br>
+https://explorer.solana.com/tx/rFYh2nWd48Af4R6uxr6C4UXqVPuwPQd6yCu9DSuYuLVjvJUSHrV3qqed8derAqTHN9XRE5CtSWeGkHBd6oU2uSs?cluster=devnet<br>
+https://explorer.solana.com/address/GyXt5EBitAQhEpYtio6mUg7Z7rY6Dn6ohC36XjzDmgQ2?cluster=devnet <br>
+
 # Learn More
 To learn more about Next.js, take a look at the following resources:
 
