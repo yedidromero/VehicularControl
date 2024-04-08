@@ -1,0 +1,16 @@
+[package]
+name = "vehicular_control"
+version = "0.1.0"
+authors = ["Sin Bandera"]
+edition = "2024"
+
+[dependencies]
+solana-program = { version = "1.9.3" }
+spl-token = { version = "3.3.2" , features = ["fixed-point"] }
+
+[lib]
+name = "vehicular_control"
+crate-type = ["cdylib"]
+
+[features]
+default = ["solana-program", "spl-token"]
