@@ -1,175 +1,112 @@
+
+#[dependencies]
+solana-program = { version = "1.9.3" }
+spl-token = { version = "3.3.2" , features = ["fixed-point"] }  
+
+use solana_program::program::Program;
+
+#[account]
+#[derive(Default)]
+pub struct Mint {
+    pub supply: u64,
+    pub mint_authority: Option<Pubkey>,
+    pub freeze_authority: Option<Pubkey>,
+    pub decimal_places: u8,
+    pub is_mutable: bool,
+    pub custodian_option: Option<CustodianOption>,
+    pub reserve: Option<Reserve>,
+}
+
+// Dependencias del programa Solana
 use anchor_lang::prelude::*;
 
-pub mod constant;
-pub mod error;
-pub mod states;
-use crate::{constant::*, error::*, states::*};
-
-declare_id!("Bx9zQCi2Tm4X2mYZSjJtCyAnKs1e2ywfMB1FgCaEdGzX");
+declare_id!("Bx9zQCi2Tm4X2mYZSjJtCyAnKs1e2ywfMB1FgCaEdGzX"); 
 
 #[program]
 pub mod vehicular_control {
-    use super::*;
+    use anchor_lang::solana_program::rent::Rent;
 
-    pub fn initialize_user(ctx: Context<InitializeUser>) -> Result<()> {
-        // Initialize user profile with default data
-        let user_profile = &mut ctx.accounts.user_profile;
-        user_profile.authority = ctx.accounts.authority.key();
-        user_profile.last_todo = 0;
-        user_profile.todo_count = 0;
+    pub fn create_nft(
+        ctx: Context<CreateNftContext>,
+        name: String,
+        image_url: String,
+    ) -> Result<()> {
+        let mint_account = &mut ctx.accounts.mint;
+        let rent = &ctx.rent;
 
-        Ok(())
-    }
+        // Asignar memoria para los datos de la cuenta
+        let account_size = Mint::MAX_ACCOUNT_SIZE;
+        let rent_lamports = rent.rent(account_size);
 
-    pub fn add_todo(ctx: Context<AddTodo>, _content: String) -> Result<()> {
-        let todo_account = &mut ctx.accounts.todo_account;
-        let user_profile = &mut ctx.accounts.user_profile;
+        // Transferir lamports para el alquiler desde la cuenta del usuario
+        ctx.accounts.user.transfer(rent_lamports, ctx.accounts.system_program)?;
 
-        // Fill contents with argument
-        todo_account.authority = ctx.accounts.authority.key();
-        todo_account.idx = user_profile.last_todo;
-        todo_account.todo = _content;
-        todo_account.done = false;
+        // Crear una nueva cuenta mint
+        spl_token::instruction::initialize_mint(
+            &mut ctx.accounts.mint.to_account_info(),
+            &ctx.accounts.authority.to_account_info(),
+            &ctx.accounts.payer.to_account_info(),
+            decimals, // Reemplazar decimals con los decimales deseados
+            true, // ¿Es un suministro mutable?
+        )?;
 
-        // Increase todo idx for PDA
-        user_profile.last_todo = user_profile.last_todo.checked_add(1).unwrap();
+        // Crear una nueva cuenta de token para el usuario
+        spl_token::instruction::create_account(
+            &mut ctx.accounts.token_account.to_account_info(),
+            &ctx.accounts.mint.to_account_info(),
+            &ctx.accounts.authority.to_account_info(),
+            &ctx.accounts.payer.to_account_info(),
+        )?;
 
-        // Increase total todo count
-        user_profile.todo_count = user_profile.todo_count.checked_add(1).unwrap();
+        // Mintar un token a la cuenta del usuario
+        spl_token::instruction::mint_to(
+            &mut ctx.accounts.mint.to_account_info(),
+            &ctx.accounts.token_account.to_account_info(),
+            &ctx.accounts.authority.to_account_info(),
+            &ctx.accounts.payer.to_account_info(),
+            1, // Cantidad a mintear
+        )?;
 
-        Ok(())
-    }
+        // Actualizar los metadatos del NFT minteado
+        // Esta parte requiere lógica adicional para manejar la carga de la imagen
+        // Puede aprovechar bibliotecas como metaplex para esta funcionalidad
+        // ...
 
-    pub fn mark_todo(ctx: Context<MarkTodo>, todo_idx: u8) -> Result<()> {
-        let todo_account = &mut ctx.accounts.todo_account;
-        require!(!todo_account.done, TodoError::AlreadyMarked);
-
-        // Mark todo
-        todo_account.done = true;
-        Ok(())
-    }
-
-    pub fn remove_todo(ctx: Context<RemoveTodo>, todo_idx: u8) -> Result<()> {
-        // Decreate total todo count
-        let user_profile = &mut ctx.accounts.user_profile;
-        user_profile.todo_count = user_profile.todo_count.checked_sub(1).unwrap();
-
-        // No need to decrease last todo idx
-
-        // Todo PDA already closed in context
-
+        msg!("NFT creado exitosamente!");
         Ok(())
     }
 }
 
 #[derive(Accounts)]
-#[instruction()]
-pub struct InitializeUser<'info> {
+pub struct CreateNftContext {
+    #[account(init, system_program)]
+    pub mint: AccountInfo<'static>,
     #[account(mut)]
-    pub authority: Signer<'info>,
-
-    #[account(
-        init,
-        seeds = [USER_TAG, authority.key().as_ref()],
-        bump,
-        payer = authority,
-        space = 8 + std::mem::size_of::<UserProfile>(),
-    )]
-    pub user_profile: Box<Account<'info, UserProfile>>,
-
-    pub system_program: Program<'info, System>,
+    pub user: Signer,
+    #[account(system_program)]
+    pub system_program: AccountInfo<'static>,
+    #[account(executable = Rent::default().program)] // Sysvar de alquiler
+    pub rent: AccountInfo<'static>,
+    #[account(payer)] // Pagador de las comisiones de transacción
+    pub payer: Signer,
+    #[account(init, mint::authority = authority)]
+    pub token_account: AccountInfo<'static>,
+    pub authority: Signer, // Autoridad para mintear y administrar el token
 }
 
-#[derive(Accounts)]
-#[instruction()]
-pub struct AddTodo<'info> {
-    #[account(
-        mut,
-        seeds = [USER_TAG, authority.key().as_ref()],
-        bump,
-        has_one = authority,
-    )]
-    pub user_profile: Box<Account<'info, UserProfile>>,
-
-    #[account(
-        init,
-        seeds = [TODO_TAG, authority.key().as_ref(), &[user_profile.last_todo as u8].as_ref()],
-        bump,
-        payer = authority,
-        space = std::mem::size_of::<TodoAccount>() + 8,
-    )]
-    pub todo_account: Box<Account<'info, TodoAccount>>,
-
-    #[account(mut)]
-    pub authority: Signer<'info>,
-
-    pub system_program: Program<'info, System>,
+pub enum CustodianOption {
+    Custodian(Pubkey),
+    None,
 }
 
-#[derive(Accounts)]
-#[instruction(todo_idx: u8)]
-pub struct MarkTodo<'info> {
-    #[account(
-        mut,
-        seeds = [USER_TAG, authority.key().as_ref()],
-        bump,
-        has_one = authority,
-    )]
-    pub user_profile: Box<Account<'info, UserProfile>>,
-
-    #[account(
-        mut,
-        seeds = [TODO_TAG, authority.key().as_ref(), &[todo_idx].as_ref()],
-        bump,
-        has_one = authority,
-    )]
-    pub todo_account: Box<Account<'info, TodoAccount>>,
-
-    #[account(mut)]
-    pub authority: Signer<'info>,
-
-    pub system_program: Program<'info, System>,
-}
-
-#[derive(Accounts)]
-#[instruction(todo_idx: u8)]
-pub struct RemoveTodo<'info> {
-    #[account(
-        mut,
-        seeds = [USER_TAG, authority.key().as_ref()],
-        bump,
-        has_one = authority,
-    )]
-    pub user_profile: Box<Account<'info, UserProfile>>,
-
-    #[account(
-        mut,
-        close = authority,
-        seeds = [TODO_TAG, authority.key().as_ref(), &[todo_idx].as_ref()],
-        bump,
-        has_one = authority,
-    )]
-    pub todo_account: Box<Account<'info, TodoAccount>>,
-
-    #[account(mut)]
-    pub authority: Signer<'info>,
-
-    pub system_program: Program<'info, System>,
-}
-
-pub fn is_zero_account(account_info: &AccountInfo) -> bool {
-    let account_data: &[u8] = &account_info.data.borrow();
-    let len = account_data.len();
-    let mut is_zero = true;
-    for i in 0..len - 1 {
-        if account_data[i] != 0 {
-            is_zero = false;
-        }
-    }
-    is_zero
-}
-
-pub fn bump(seeds: &[&[u8]], program_id: &Pubkey) -> u8 {
-    let (_found_key, bump) = Pubkey::find_program_address(seeds, program_id);
-    bump
+#[account]
+#[derive(Default)]
+pub struct Mint {
+    pub supply: u64,
+    pub mint_authority: Option<Pubkey>,
+    pub freeze_authority: Option<Pubkey>,
+    pub decimal_places: u8,
+    pub is_mutable: bool,
+    pub custodian_option: Option<CustodianOption>,
+    pub reserve: Option<Reserve>,
 }
