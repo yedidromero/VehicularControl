@@ -237,26 +237,26 @@ const Home = () => {
     //Funcion para crear un NFT
     const generateNFT = async () => {
         try {
-            setStatusText("Creando tu NFT...❤");
+            setStatusText("CREANDO USUARIO");
             const mintedData = {
-                name: "Mi primer NFT con Superteam MX",
+                name: "USUARIO",
                 imageUrl: uploadUrl,
                 publicKey,
             };
             console.log("Este es el objeto mintedData:", mintedData);
             setStatusText(
-                "Minteando tu NFT en la blockchain Solana 🚀 Porfavor espera..."
+                "ESPERANDO..."
             );
             const { data } = await axios.post("/api/mintnft", mintedData);
             const { signature: newSignature } = data;
             const solanaExplorerUrl = `https://solscan.io/tx/${newSignature}?cluster=${SOLANA_NETWORK}`;
             console.log("solanaExplorerUrl", solanaExplorerUrl);
             setStatusText(
-                "¡Listo! Tu NFT se a creado, revisa tu Phantom Wallet 🖖"
+                "¡Listo! USUARIO CREADO"
             );
         } catch (error) {
-            console.error("ERROR GENERATE NFT", error);
-            toast.error("Error al generar el NFT");
+            console.error("ERROR GENERATE ", error);
+            toast.error("Error al generar");
         }
     };
 
@@ -305,10 +305,11 @@ const Home = () => {
         </a>
         <a href="/historial" className="flex items-center text-gray-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
-                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/>
+  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
                             </svg>
-                            historial
+                            Historial
                         </a>
     </div>
 </div>
