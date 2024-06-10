@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/*colors*/
 .hover\:bg-indigo-700:hover{
     background-color: #FCE184 !important;
     color: #0F0E0C;
   }
+  
   .bg-indigo-600{
     background-color: #FFB877 !important;
   }
