@@ -432,11 +432,10 @@ const Home = () => {
             </nav>
                                 {publicKey ? (
 
-                                    <div class="flex justify-center items-center h-screen" style={{ backgroundColor: '#0F0E0C' }}>
-                                    
-  <form class=" border border-orange-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg" action="/submit_registro" method="post">
-  <div className="flex items-center justify-center mb-2" >
-           <img src="https://cdn.prod.website-files.com/6629bf6a5421f2bbaa5e6255/662dde38b576a597d4cc2cac_bonkhead_nat-opt.svg" alt=""/>   
+                                    <div class="flex justify-center items-center min-h-screen bg-black p-4">
+  <form class="w-full max-w-md border border-[#FFB877] shadow-md rounded px-8 pt-6 pb-8" action="/submit_registro" method="post">
+    <div class="flex items-center justify-center mb-4">
+      <img src="https://cdn.prod.website-files.com/6629bf6a5421f2bbaa5e6255/662dde38b576a597d4cc2cac_bonkhead_nat-opt.svg" alt="Logo"/>
     </div>
     <div class="mb-4">
       <label class="block text-white text-sm font-bold mb-2" for="nombre">Nombre completo:</label>
@@ -465,12 +464,13 @@ const Home = () => {
       <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Aclaraciones u otras notas"></textarea>
     </div>
     <div class="flex items-center justify-between">
-    <input class="bg-yellow-500 hover:bg-yellow-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:text-black" type="submit" value="Registrar"/>
-
+      <input class="bg-[#FFB877] hover:bg-[#FCE184] text-white hover:text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Registrar"/>
     </div>
     <p class="text-xs italic text-red-600 mt-2">Si pagas con Bonk tendrás un 10% de descuento en tu anualidad.</p>
   </form>
 </div>
+
+
 
 
                     ) : (
