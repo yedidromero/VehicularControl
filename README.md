@@ -10,6 +10,11 @@ pnpm dev<br>
 ** Additional need next ** <br>
 for yarn add next
 <br>
+<br>
+yarn add @solana/web3.js@latest
+<br>
+
+yarn add rpc-websockets
 
 ### Open 
 http://localhost:3000 with your browser to see the result.
