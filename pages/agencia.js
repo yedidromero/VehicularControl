@@ -121,7 +121,7 @@ const Home = () => {
         try {
             //Consultar el balance de la wallet
             getBalances(publicKey);
-            console.log("Este es el balance", balance);
+            console.log("Este es el balance:", balance);
 
             //Si el balance es menor al monto a enviar
             if (balance < amount) {
